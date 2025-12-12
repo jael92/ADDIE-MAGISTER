@@ -3,72 +3,342 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desmitificando la Fuerza</title>
+    <title>Clase de Física: Fuerza y Movimiento</title>
     <style>
-        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; max-width: 800px; margin: 0 auto; padding: 20px; }
-        header { background: #2c3e50; color: white; padding: 2rem; text-align: center; border-radius: 10px; margin-bottom: 2rem; }
-        h1 { margin: 0; }
-        .subtitle { font-style: italic; opacity: 0.8; }
-        section { background: #f9f9f9; padding: 20px; margin-bottom: 20px; border-left: 5px solid #3498db; border-radius: 4px; }
-        h2 { color: #2c3e50; }
-        .misconception { background: #ffebee; padding: 15px; border-radius: 5px; border: 1px solid #ffcdd2; }
-        .correction { background: #e8f5e9; padding: 15px; border-radius: 5px; border: 1px solid #c8e6c9; margin-top: 10px; }
-        footer { text-align: center; font-size: 0.8rem; color: #777; margin-top: 4rem; border-top: 1px solid #eee; padding-top: 1rem; }
-        button { background: #3498db; color: white; border: none; padding: 10px 20px; cursor: pointer; border-radius: 5px; font-size: 1rem; }
-        button:hover { background: #2980b9; }
+        :root {
+            --primary-color: #2c3e50;
+            --accent-color: #3498db;
+            --bg-light: #ecf0f1;
+            --text-dark: #333;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem 0;
+            text-align: center;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        .module {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            margin-bottom: 30px;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+
+        .module h2 {
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        .objective-box {
+            background-color: #e8f4f8;
+            border-left: 5px solid var(--accent-color);
+            padding: 15px;
+            font-style: italic;
+            margin: 20px 0;
+        }
+
+        .qr-section {
+            text-align: center;
+            border: 2px dashed #ccc;
+            padding: 20px;
+            margin: 20px 0;
+            background-color: #fafafa;
+        }
+
+        .concept-card {
+            background: var(--bg-light);
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+        .thought-provoking {
+            background-color: #ffeaa7;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.1em;
+            margin: 20px 0;
+        }
+
+        .steps-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .step-card {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        .step-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            background-color: #ddd;
+        }
+
+        .step-card p {
+            padding: 10px;
+            font-weight: bold;
+        }
+
+        .video-container {
+            position: relative;
+            padding-bottom: 56.25%; /* 16:9 */
+            height: 0;
+            margin: 20px 0;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 8px;
+        }
+
+        /* Estilos para el cuestionario */
+        .quiz-question {
+            margin-bottom: 20px;
+            border-bottom: 1px solid #eee;
+            padding-bottom: 15px;
+        }
+
+        .quiz-options button {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            margin: 5px 0;
+            background-color: white;
+            border: 2px solid var(--accent-color);
+            color: var(--primary-color);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+        }
+
+        .quiz-options button:hover {
+            background-color: var(--accent-color);
+            color: white;
+        }
+
+        .feedback {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+            font-weight: bold;
+        }
+
+        .correct {
+            background-color: #d4edda;
+            color: #155724;
+            display: block;
+        }
+
+        .incorrect {
+            background-color: #f8d7da;
+            color: #721c24;
+            display: block;
+        }
+
+        .btn-check {
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+
     </style>
 </head>
 <body>
 
-    <header>
-        <h1>Conceptos Erróneos sobre la Fuerza</h1>
-        <p class="subtitle">Un recurso educativo basado en el modelo ADDIE</p>
-    </header>
+<header>
+    <h1>Física I: Fuerza, Movimiento y Energía</h1>
+    <p>Explorando las leyes del universo</p>
+</header>
 
-    <section id="objetivos">
-        <h2>🎯 Objetivos de Aprendizaje</h2>
-        <p>Al finalizar este recurso, serás capaz de:</p>
-        <ul>
-            <li>Distinguir científicamente entre Fuerza y Energía.</li>
-            <li>Identificar por qué la fuerza no es igual al movimiento.</li>
-        </ul>
-    </section>
+<div class="container">
 
-    <section id="modulo1">
-        <h2>🚫 Error Común #1: ¿Fuerza = Energía?</h2>
-        <div class="misconception">
-            <strong>Lo que muchos piensan (especialmente en 6º semestre):</strong>
-            "La fuerza es una energía que interactúa con los cuerpos" o "Si tenemos más energía, tenemos más fuerza".
+    <section class="module" id="modulo1">
+        <h2>Módulo 1: Introducción y Objetivos</h2>
+        
+        <h3>Objetivo General</h3>
+        <div class="objective-box">
+            Al finalizar la revisión de los casos prácticos, el estudiante será capaz de diferenciar correctamente el concepto de fuerza de los conceptos de energía y movimiento, basando sus conclusiones en el análisis de observaciones experimentales, demostrando la corrección de sus ideas previas en el cuestionario de validación.
         </div>
-        <div class="correction">
-            <strong>La Realidad Física:</strong>
-            La fuerza es una <em>interacción</em> entre dos cuerpos. La energía es una <em>capacidad</em> para realizar trabajo. Tú puedes tener energía, pero no puedes "tener" fuerza; solo puedes ejercerla.
+
+        <h3>Actividad 1: Lluvia de Ideas</h3>
+        <p>Antes de comenzar, queremos saber qué piensas. Escanea el código para ingresar a nuestra pizarra colaborativa y responde: <strong>¿Qué es para ti la fuerza?</strong></p>
+        
+        <div class="qr-section">
+            <img src="https://via.placeholder.com/150?text=Codigo+QR+Aqui" alt="Código QR para lluvia de ideas">
+            <p><small>Escanea con tu celular o haz <a href="#">clic aquí</a> para participar.</small></p>
         </div>
     </section>
 
-    <section id="modulo2">
-        <h2>🚫 Error Común #2: ¿Fuerza = Movimiento?</h2>
-        <div class="misconception">
-            <strong>Lo que muchos piensan (especialmente en 4º semestre):</strong>
-            "La fuerza es una magnitud para propiciar movimiento" o "La fuerza es el movimiento mismo".
+    <section class="module" id="modulo2">
+        <h2>Módulo 2: Conceptos Fundamentales y Experimentación</h2>
+        
+        <div class="concept-card">
+            <h3>1. Fricción</h3>
+            <p>Es la fuerza que se opone al movimiento relativo entre dos superficies en contacto. ¡Es la razón por la que las cosas se detienen cuando dejas de empujarlas!</p>
         </div>
-        <div class="correction">
-            <strong>La Realidad Física:</strong>
-            Según Newton, un objeto puede moverse a velocidad constante sin que ninguna fuerza neta actúe sobre él. La fuerza causa <em>aceleración</em>, no movimiento per se.
+
+        <div class="concept-card">
+            <h3>2. Primera Ley de Newton (Inercia)</h3>
+            <p>Todo cuerpo preserva su estado de reposo o movimiento uniforme y rectilíneo a no ser que sea obligado a cambiar su estado por fuerzas impresas sobre él.</p>
+        </div>
+
+        <div class="thought-provoking">
+            ❓ Pregunta de reflexión: ¿Qué pasaría con un objeto en movimiento si mágicamente apagamos la fricción?
+        </div>
+
+        <h3>Proyecto: Construye tu propio Aerodeslizador</h3>
+        <p>Vamos a desafiar la fricción construyendo un vehículo que se desliza sobre una capa de aire.</p>
+
+        <div class="steps-container">
+            <div class="step-card">
+                <img src="https://via.placeholder.com/250x150?text=Paso+1+Materiales" alt="Materiales: CD, Globo, Tapa">
+                <p>1. Reúne los materiales: CD viejo, tapa de botella deportiva (push-pull), globo y pegamento.</p>
+            </div>
+            <div class="step-card">
+                <img src="https://via.placeholder.com/250x150?text=Paso+2+Pegar" alt="Pegar tapa al CD">
+                <p>2. Pega la tapa herméticamente sobre el orificio central del CD usando silicón. ¡No dejes fugas!</p>
+            </div>
+            <div class="step-card">
+                <img src="https://via.placeholder.com/250x150?text=Paso+3+Inflar" alt="Inflar globo">
+                <p>3. Infla el globo y retuerce el cuello para que no se salga el aire (aún no lo ates).</p>
+            </div>
+            <div class="step-card">
+                <img src="https://via.placeholder.com/250x150?text=Paso+4+Ensamblar" alt="Colocar globo en tapa">
+                <p>4. Coloca la boca del globo en la tapa. Abre la tapa y... ¡empújalo suavemente!</p>
+            </div>
+        </div>
+
+        <h3>Video de Apoyo</h3>
+        <p>Mira este video para guiarte en la construcción:</p>
+        <div class="video-container">
+            <iframe src="https://www.youtube.com/embed/CfLpyDvn4bQ" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
         </div>
     </section>
 
-    <section id="actividad">
-        <h2>🧠 Comprueba tu conocimiento</h2>
-        <p>¿Es la gravedad una "presión" que ejerce la Tierra?</p>
-        <button onclick="alert('¡Incorrecto! La gravedad es una fuerza de atracción a distancia, no una presión (fuerza por unidad de área). Este es otro concepto erróneo común.')">Ver Respuesta</button>
+    <section class="module" id="modulo3">
+        <h2>Módulo 3: Simulación Virtual (PhET Colorado)</h2>
+        <p>Para visualizar mejor las fuerzas invisibles, utilizaremos el simulador <em>Fuerzas y Movimiento: Fundamentos</em>.</p>
+        
+        <div style="background-color: #fff3cd; padding: 15px; border-radius: 5px; border: 1px solid #ffeeba;">
+            <strong>Acceso al recurso:</strong> Ingresa a <a href="https://phet.colorado.edu/es/simulation/forces-and-motion-basics" target="_blank">PhET Colorado: Fuerzas y Movimiento</a>.
+        </div>
+
+        <h3>Paso a paso de la actividad:</h3>
+        <ol>
+            <li><strong>Exploración de Fuerza Neta:</strong> Selecciona la opción "Fuerza Neta". Arrastra muñecos azules y rojos a la cuerda. Intenta poner el mismo número de muñecos en ambos lados. ¿Se mueve el carro? Ahora pon más muñecos en el lado rojo. Observa la flecha verde (Suma de fuerzas).</li>
+            <li><strong>Introduciendo la Fricción:</strong> Regresa al menú y selecciona "Fricción". Activa las casillas "Fuerzas", "Suma de fuerzas", "Valores" y "Rapidez".</li>
+            <li><strong>El Experimento Virtual:</strong> 
+                <ul>
+                    <li>Empuja la caja aplicando 50 Newtons de fuerza aplicada. ¿Se mueve? (Observa la fuerza de fricción oponiéndose).</li>
+                    <li>Aumenta la fuerza hasta que la caja se mueva.</li>
+                    <li>Deja de aplicar fuerza repentinamente (suelta el muñeco). Observa cómo la caja se va frenando poco a poco. <strong>¿Qué fuerza está causando que se detenga?</strong></li>
+                </ul>
+            </li>
+            <li><strong>Hielo vs Madera:</strong> Cambia la fricción a "Nada" (Hielo) en la barra deslizadora. Empuja la caja una vez y suéltala. ¿Se detiene esta vez? Relaciona esto con la pregunta del Módulo 2.</li>
+        </ol>
     </section>
 
-    <footer>
-        <p>Desarrollado para el Trabajo Final de Diseño Instruccional.</p>
-        <p>Basado en la investigación de García Rangel et al. (2010).</p>
-        <p>Asistido por IA (Gemini) para estructura y código.</p>
-    </footer>
+    <section class="module" id="modulo4">
+        <h2>Módulo 4: Evaluación y Juego</h2>
+        <p>Pon a prueba lo aprendido. Selecciona la respuesta correcta y obtén retroalimentación instantánea.</p>
+
+        <div id="quiz-container">
+            
+            <div class="quiz-question" id="q1">
+                <p><strong>1. ¿Cuál es la diferencia principal entre Fuerza y Energía?</strong></p>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('q1', 'incorrect', 'Incorrecto. Ambas son escalares o vectoriales dependiendo del contexto, pero esa no es la diferencia conceptual clave.')">Son lo mismo, solo cambia el nombre.</button>
+                    <button onclick="checkAnswer('q1', 'correct', '¡Correcto! La fuerza es una interacción (un empujón o jalón) que causa cambio de movimiento, mientras que la energía es la capacidad de un sistema para realizar trabajo.')">La fuerza es una interacción que produce cambios de movimiento; la energía es la capacidad para realizar trabajo.</button>
+                    <button onclick="checkAnswer('q1', 'incorrect', 'Incorrecto. La fuerza se mide en Newtons y la energía en Joules.')">La fuerza se mide en Joules y la energía en Newtons.</button>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="quiz-question" id="q2">
+                <p><strong>2. En el experimento del aerodeslizador, ¿cuál es la función del aire que sale del globo?</strong></p>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('q2', 'correct', '¡Exacto! Al crear un colchón de aire, separamos el CD del suelo, eliminando casi toda la fricción.')">Crear un colchón de aire que reduce drásticamente la fricción con el suelo.</button>
+                    <button onclick="checkAnswer('q2', 'incorrect', 'No exactamente. Aunque el aire sale, su función principal aquí no es la propulsión a chorro como un cohete, sino la sustentación.')">Servir de motor a reacción para que vaya muy rápido.</button>
+                    <button onclick="checkAnswer('q2', 'incorrect', 'Incorrecto. El peso sigue siendo el mismo.')">Aumentar el peso del CD para que tenga más estabilidad.</button>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+            <div class="quiz-question" id="q3">
+                <p><strong>3. Según la Primera Ley de Newton (Inercia), si lanzamos un objeto en el espacio donde no hay fricción ni gravedad...</strong></p>
+                <div class="quiz-options">
+                    <button onclick="checkAnswer('q3', 'incorrect', 'Incorrecto. Sin fricción que lo detenga, no necesita combustible para seguir moviéndose por inercia.')">Se detendrá eventualmente porque se le acaba el impulso.</button>
+                    <button onclick="checkAnswer('q3', 'correct', '¡Muy bien! Esa es la definición de Inercia. El objeto mantendrá su velocidad constante por siempre a menos que algo lo toque.')">Se moverá en línea recta a velocidad constante para siempre.</button>
+                    <button onclick="checkAnswer('q3', 'incorrect', 'Incorrecto. Solo cambiaría de dirección si una fuerza externa actúa sobre él.')">Empezará a girar en círculos.</button>
+                </div>
+                <div class="feedback"></div>
+            </div>
+
+        </div>
+    </section>
+
+</div>
+
+<script>
+    function checkAnswer(questionId, status, message) {
+        const questionDiv = document.getElementById(questionId);
+        const feedbackDiv = questionDiv.querySelector('.feedback');
+        
+        // Limpiar clases previas
+        feedbackDiv.classList.remove('correct', 'incorrect');
+        
+        // Asignar nueva clase y mensaje
+        feedbackDiv.classList.add(status);
+        feedbackDiv.textContent = message;
+        
+        // Efecto visual simple
+        feedbackDiv.style.opacity = 0;
+        setTimeout(() => {
+            feedbackDiv.style.opacity = 1;
+        }, 100);
+    }
+</script>
 
 </body>
 </html>
