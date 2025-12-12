@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Módulo 4: Evaluación</title>
+    <link rel="stylesheet" href="estilos.css">
+</head>
+<body>
+    <nav>
+        <a href="index.html">Inicio</a>
+        <a href="modulo1.html">Mód 1</a>
+        <a href="modulo2.html">Mód 2</a>
+        <a href="modulo3.html">Mód 3</a>
+        <a href="modulo4.html" class="active">Evaluación</a>
+    </nav>
+
+    <div class="container">
+        <h2>Módulo 4: ¿Cuánto aprendiste?</h2>
+        <p>Responde correctamente para ganar.</p>
+
+        <div id="p1">
+            <p><strong>1. Si apagamos mágicamente la fricción, un objeto en movimiento...</strong></p>
+            <button class="quiz-option" onclick="verificar('p1', false, '¡Incorrecto! Sin fricción, nada lo frenaría.')">Se detendría inmediatamente.</button>
+            <button class="quiz-option" onclick="verificar('p1', true, '¡Correcto! Por inercia, seguiría moviéndose infinitamente.')">Seguiría moviéndose para siempre.</button>
+            <div class="feedback"></div>
+        </div>
+        <hr>
+
+        <div id="p2">
+            <p><strong>2. ¿Qué hace el globo en el aerodeslizador?</strong></p>
+            <button class="quiz-option" onclick="verificar('p2', true, '¡Exacto! El aire crea una capa que separa el CD del suelo.')">Crea un colchón de aire para reducir la fricción.</button>
+            <button class="quiz-option" onclick="verificar('p2', false, 'No. El peso es el mismo, solo cambia el rozamiento.')">Hace que el CD pese menos.</button>
+            <div class="feedback"></div>
+        </div>
+        <hr>
+
+        <div id="p3">
+            <p><strong>3. Diferencia entre Fuerza y Energía:</strong></p>
+            <button class="quiz-option" onclick="verificar('p3', false, 'Incorrecto. Es al revés (Fuerza=Newtons, Energía=Joules).')">La fuerza se mide en Joules.</button>
+            <button class="quiz-option" onclick="verificar('p3', true, '¡Muy bien! La fuerza es la interacción, la energía es la capacidad.')">La fuerza es una interacción que causa cambios; la energía es capacidad para realizar trabajo.</button>
+            <div class="feedback"></div>
+        </div>
+
+        <div style="margin-top: 30px; text-align: center;">
+            <a href="index.html" class="btn-nav">Volver al Inicio</a>
+        </div>
+    </div>
+
+    <script>
+        function verificar(idPregunta, esCorrecta, mensaje) {
+            const div = document.getElementById(idPregunta);
+            const feedback = div.querySelector('.feedback');
+            
+            feedback.className = 'feedback ' + (esCorrecta ? 'correct' : 'incorrect');
+            feedback.textContent = mensaje;
+            feedback.style.display = 'block';
+        }
+    </script>
+</body>
+</html>
