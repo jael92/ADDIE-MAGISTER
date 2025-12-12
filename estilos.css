@@ -1,0 +1,76 @@
+/* estilos.css */
+:root {
+    --primary: #2c3e50;
+    --accent: #3498db;
+    --light: #ecf0f1;
+    --text: #333;
+}
+
+body {
+    font-family: 'Segoe UI', sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: var(--text);
+    padding-bottom: 50px;
+}
+
+/* Navegación */
+nav {
+    background-color: var(--primary);
+    padding: 1rem;
+    text-align: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+nav a:hover, nav a.active {
+    color: var(--accent);
+    border-bottom: 2px solid var(--accent);
+}
+
+.container {
+    max-width: 800px;
+    margin: 20px auto;
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+}
+
+h1, h2, h3 { color: var(--primary); }
+
+.btn-nav {
+    display: inline-block;
+    background: var(--accent);
+    color: white;
+    padding: 10px 20px;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-top: 20px;
+}
+
+.btn-nav:hover { background-color: #2980b9; }
+
+/* Estilos específicos */
+.objective-box { background: #e8f4f8; border-left: 5px solid var(--accent); padding: 15px; font-style: italic; }
+.thought-box { background: #fff3cd; padding: 15px; border-radius: 5px; text-align: center; font-weight: bold; border: 1px solid #ffeeba; }
+.step-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px; margin-top: 20px; }
+.step-card { border: 1px solid #ddd; padding: 10px; text-align: center; border-radius: 5px; }
+.step-card img { max-width: 100%; height: auto; }
+.video-responsive { overflow:hidden; padding-bottom:56.25%; position:relative; height:0; margin: 20px 0; }
+.video-responsive iframe { left:0; top:0; height:100%; width:100%; position:absolute; }
+
+/* Quiz */
+.quiz-option { display: block; width: 100%; padding: 10px; margin: 5px 0; background: white; border: 2px solid var(--accent); cursor: pointer; text-align: left; }
+.quiz-option:hover { background: var(--accent); color: white; }
+.feedback { margin-top: 10px; padding: 10px; display: none; border-radius: 5px; }
+.correct { background: #d4edda; color: #155724; display: block; }
+.incorrect { background: #f8d7da; color: #721c24; display: block; }
