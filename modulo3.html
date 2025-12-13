@@ -4,6 +4,66 @@
     <meta charset="UTF-8">
     <title>Módulo 3: Simulación</title>
     <link rel="stylesheet" href="estilos.css">
+    
+    <style>
+        .simulador-container {
+            font-family: 'Segoe UI', sans-serif;
+            max-width: 100%;
+            margin: 30px auto;
+            padding: 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        }
+        .controls {
+            margin-bottom: 20px;
+            background: #fff;
+            padding: 15px;
+            border-radius: 8px;
+            border: 1px solid #ddd;
+        }
+        .slider-group {
+            margin-bottom: 15px;
+        }
+        .slider-group label {
+            display: block;
+            font-weight: bold;
+            margin-bottom: 5px;
+            color: #2c3e50;
+        }
+        input[type=range] {
+            width: 100%;
+            cursor: pointer;
+        }
+        canvas {
+            background-color: #fff;
+            border: 1px solid #ccc;
+            display: block;
+            margin: 0 auto;
+            max-width: 100%; /* Para que se adapte a pantallas pequeñas */
+        }
+        .result-box {
+            text-align: center;
+            margin-top: 15px;
+            font-size: 1.2em;
+            font-weight: bold;
+            padding: 10px;
+            border-radius: 5px;
+            background-color: #eee;
+            transition: background-color 0.3s;
+        }
+        .mission-status {
+            font-size: 1em;
+            color: #666;
+            text-align: center;
+            margin-bottom: 15px;
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ffeeba;
+        }
+    </style>
 </head>
 <body>
     <nav>
@@ -15,27 +75,156 @@
     </nav>
 
     <div class="container">
-        <h2>Módulo 3: Laboratorio Virtual</h2>
-        <p>Utilizaremos el simulador <strong>PhET Colorado: Fuerzas y Movimiento</strong>.</p>
+        <h2>Módulo 3: Laboratorios Virtuales</h2>
         
-        <a href="https://phet.colorado.edu/es/simulation/forces-and-motion-basics" target="_blank" class="btn-nav" style="background: #e67e22; width: 100%; text-align: center; box-sizing: border-box;">Abrir Simulador PhET</a>
+        <h3>Actividad 1: Exploración en PhET</h3>
+        <p>Primero, comprende los conceptos básicos con el simulador de la Universidad de Colorado.</p>
+        <a href="https://phet.colorado.edu/es/simulation/forces-and-motion-basics" target="_blank" class="btn-nav" style="background: #e67e22; width: 100%; text-align: center; box-sizing: border-box; margin-bottom: 20px;">Abrir Simulador PhET</a>
 
-        <h3>Guía paso a paso:</h3>
-        <ol>
-            <li><strong>Fuerza Neta:</strong> Entra a la pestaña "Fuerza Neta". Coloca muñecos del mismo tamaño en ambos lados de la cuerda. ¿Se mueve el carro? (Equilibrio).</li>
-            <li><strong>Fricción:</strong> Ve a la pestaña "Fricción". Activa todas las casillas de valores.
-                <ul>
-                    <li>Empuja la caja suavemente. Nota cómo la <strong>Fuerza de Fricción</strong> aparece en dirección opuesta.</li>
-                    <li>Empuja fuerte hasta que se mueva y luego suelta. Observa cómo la fricción frena la caja.</li>
-                </ul>
-            </li>
-            <li><strong>Sin Fricción (Hielo):</strong> Baja la barra de fricción a "Nada". Empuja la caja una vez. ¿Se detiene? Relaciona esto con la pregunta del Módulo 2.</li>
-        </ol>
+        <hr style="margin: 40px 0; border: 0; border-top: 1px solid #ccc;">
 
-        <div style="display: flex; justify-content: space-between;">
+        <h3>Actividad 2: El Desafío de Energía</h3>
+        <p>Ahora que entiendes la fuerza, demuestra que puedes generar suficiente energía (Trabajo) para cumplir la misión.</p>
+
+        <div class="simulador-container">
+            <h3 style="text-align: center; color: #2c3e50; margin-top:0;">Simulador: Fuerza vs. Desplazamiento</h3>
+            
+            <p class="mission-status">🚀 <strong>Misión:</strong> Consigue entre <strong>800 y 1000 Joules</strong> para despegar.</p>
+        
+            <div class="controls">
+                <div class="slider-group">
+                    <label>Fuerza Aplicada (N): <span id="val-fuerza">0</span> N</label>
+                    <input type="range" id="fuerza" min="0" max="100" value="0">
+                </div>
+                <div class="slider-group">
+                    <label>Desplazamiento (m): <span id="val-distancia">0</span> m</label>
+                    <input type="range" id="distancia" min="0" max="20" value="0">
+                </div>
+            </div>
+        
+            <canvas id="graficoCanvas" width="500" height="300"></canvas>
+        
+            <div id="resultado" class="result-box">Energía Transferida: 0 Joules</div>
+            <div id="mensaje-pedagogico" style="text-align:center; margin-top:10px; font-style: italic; color:#d35400; font-weight: bold;"></div>
+        </div>
+        <div style="display: flex; justify-content: space-between; margin-top: 30px;">
             <a href="modulo2.html" class="btn-nav">&larr; Anterior</a>
             <a href="modulo4.html" class="btn-nav">Ir a Evaluación &rarr;</a>
         </div>
     </div>
+
+    <script>
+        // Configuración del Canvas
+        const canvas = document.getElementById('graficoCanvas');
+        const ctx = canvas.getContext('2d');
+        const sliderFuerza = document.getElementById('fuerza');
+        const sliderDistancia = document.getElementById('distancia');
+        const spanFuerza = document.getElementById('val-fuerza');
+        const spanDistancia = document.getElementById('val-distancia');
+        const divResultado = document.getElementById('resultado');
+        const msgPedagogico = document.getElementById('mensaje-pedagogico');
+
+        // Factores de escala para el dibujo
+        const escalaX = 20; // pixeles por metro
+        const escalaY = 2.5; // pixeles por Newton
+        const origenX = 40;
+        const origenY = 260;
+
+        function dibujar() {
+            // Limpiar canvas
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            const F = parseInt(sliderFuerza.value);
+            const d = parseInt(sliderDistancia.value);
+            const W = F * d;
+
+            // Actualizar textos
+            spanFuerza.textContent = F;
+            spanDistancia.textContent = d;
+            divResultado.textContent = `Energía (Trabajo): ${W} Joules`;
+
+            // Lógica del Juego (Gamificación)
+            if (W >= 800 && W <= 1000) {
+                divResultado.style.backgroundColor = "#d4edda"; // Verde
+                divResultado.style.color = "#155724";
+                divResultado.textContent += " ✅ ¡OBJETIVO LOGRADO!";
+            } else {
+                divResultado.style.backgroundColor = "#eee"; // Neutro (lo cambié de rojo para que no parezca error al inicio)
+                divResultado.style.color = "#333";
+                
+                // Si se pasan
+                if (W > 1000) {
+                    divResultado.style.backgroundColor = "#f8d7da";
+                    divResultado.style.color = "#721c24";
+                    divResultado.textContent += " ⚠️ ¡Demasiada energía!";
+                }
+            }
+
+            // Mensaje Pedagógico Clave
+            if (d === 0 && F > 0) {
+                msgPedagogico.textContent = "⚠️ ¡OJO! Aplicas mucha fuerza, pero sin desplazamiento NO hay energía.";
+            } else if (F === 0 && d > 0) {
+                msgPedagogico.textContent = "Sin fuerza no hay transferencia de energía, solo inercia.";
+            } else {
+                msgPedagogico.textContent = "";
+            }
+
+            // Dibujar Ejes
+            ctx.beginPath();
+            ctx.strokeStyle = "#000";
+            ctx.lineWidth = 2;
+            // Eje Y
+            ctx.moveTo(origenX, 10);
+            ctx.lineTo(origenX, origenY);
+            // Eje X
+            ctx.lineTo(canvas.width - 10, origenY);
+            ctx.stroke();
+
+            // Etiquetas Ejes
+            ctx.fillStyle = "#000";
+            ctx.font = "12px Arial"; // Fuente más pequeña para los ejes
+            ctx.fillText("Fuerza (N)", 10, 20);
+            ctx.fillText("Desplazamiento (m)", canvas.width - 120, origenY + 30);
+
+            // DIBUJAR EL ÁREA (RECTÁNGULO DE ENERGÍA)
+            if (d > 0 && F > 0) {
+                ctx.fillStyle = "rgba(52, 152, 219, 0.6)"; // Azul semitransparente
+                const anchoRect = d * escalaX;
+                const altoRect = F * escalaY;
+                
+                // Nota: En canvas Y crece hacia abajo, por eso restamos del origen
+                ctx.fillRect(origenX, origenY - altoRect, anchoRect, altoRect);
+                
+                // Borde del rectángulo
+                ctx.strokeRect(origenX, origenY - altoRect, anchoRect, altoRect);
+                
+                // Texto "Área" en el medio
+                if (d > 2 && F > 10) {
+                    ctx.fillStyle = "#fff";
+                    ctx.font = "bold 14px Arial";
+                    // Ajuste para centrar mejor el texto
+                    let textX = origenX + (anchoRect / 2) - 40;
+                    if(textX < origenX) textX = origenX + 5;
+                    
+                    ctx.fillText("ENERGÍA", textX, origenY - (altoRect / 2));
+                }
+            } else if (d === 0 && F > 0) {
+                // Solo dibujar la línea de fuerza sin área
+                ctx.beginPath();
+                ctx.strokeStyle = "red";
+                ctx.lineWidth = 4;
+                ctx.moveTo(origenX, origenY);
+                ctx.lineTo(origenX, origenY - (F * escalaY));
+                ctx.stroke();
+            }
+        }
+
+        // Event Listeners
+        sliderFuerza.addEventListener('input', dibujar);
+        sliderDistancia.addEventListener('input', dibujar);
+
+        // Dibujo inicial
+        dibujar();
+    </script>
 </body>
 </html>
