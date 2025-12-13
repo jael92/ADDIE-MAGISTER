@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Encuesta de Satisfacción | Clase de Física</title>
+    <style>
+        /* Estilos básicos para que se vea bien ordenado */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        /* Menú de navegación igual al de tus otras páginas */
+        nav {
+            background-color: #333;
+            overflow: hidden;
+            text-align: center;
+        }
+        nav a {
+            display: inline-block;
+            color: #f2f2f2;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+            font-size: 17px;
+        }
+        nav a:hover {
+            background-color: #ddd;
+            color: black;
+        }
+        nav a.active {
+            background-color: #04AA6D; /* Color destacado para la página actual */
+            color: white;
+        }
+
+        /* Contenedor principal */
+        .main-container {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: white;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+
+        h1 { text-align: center; color: #333; }
+        p.intro { text-align: center; margin-bottom: 20px; }
+
+        /* Ajustes para el formulario */
+        iframe {
+            width: 100%;
+            height: 1400px; /* Altura suficiente para ver todas las preguntas */
+            border: none;
+        }
+
+        footer {
+            background-color: #333;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+<nav>
+    <a href="index.html">Inicio</a>
+    <a href="modulo1.html">Mód 1</a>
+    <a href="modulo2.html">Mód 2</a>
+    <a href="modulo3.html">Mód 3</a>
+    <a href="modulo4.html">Evaluación</a>
+    <a href="encuesta.html" class="active">Encuesta</a>
+</nav>
+
+<div class="main-container">
+    <h1>Encuesta de Satisfacción</h1>
+    <p class="intro">Tu opinión nos ayuda a mejorar. Por favor responde las siguientes preguntas:</p>
+
+    <iframe src="https://docs.google.com/forms/d/e/1FAIpQLSdIcbKXjx5GW2oiN6FUkhQjxPrkxvgpsd4Va6JhHqiWLw9eZQ/viewform?embedded=true">Cargando…</iframe>
+</div>
+
+<footer>
+    <p>Proyecto Educativo - Modelo ADDIE</p>
+</footer>
+
+</body>
+</html>
